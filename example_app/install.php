@@ -7,8 +7,6 @@ require '../MerchiumClient.php';
 define('MERCHIUM_APP_KEY', '');
 define('MERCHIUM_SHARED_SECRET', '');
 
-$access_token = empty($_COOKIE['merchium_access_token'])? '' : $_COOKIE['merchium_access_token'];
-
 if (!empty($_GET['code'])) {
     $shop_domain = $_GET['shop'];
     $merchium = new MerchiumClient(MERCHIUM_APP_KEY, MERCHIUM_SHARED_SECRET, $shop_domain);
