@@ -2,22 +2,22 @@
 
 class MerchiumClient
 {
-    const LIB_VERSION = '0.9.1';
+    const LIB_VERSION = '0.9.2';
 
     public $shop_domain;
 
     protected $token;
     protected $api_key;
     protected $access_token;
-    protected $shared_secret;
+    protected $client_secret;
     protected $last_response_headers = null;
     protected $last_error_status = 0;
     protected $last_error = '';
 
-    public function __construct($app_key, $shared_secret, $shop_domain, $access_token = '')
+    public function __construct($app_key, $client_secret, $shop_domain, $access_token = '')
     {
         $this->app_key       = $app_key;
-        $this->shared_secret = $shared_secret;
+        $this->client_secret = $client_secret;
         $this->shop_domain   = rtrim($shop_domain, '/') . '/';
         $this->access_token  = $access_token;
     }
@@ -42,7 +42,7 @@ class MerchiumClient
         $url = "http://{$this->shop_domain}api/access_token";
         $params = array(
             'client_id'     => $this->app_key,
-            'client_secret' => $this->shared_secret,
+            'client_secret' => $this->client_secret,
             'code'          => $code,
         );
 
@@ -242,7 +242,7 @@ class MerchiumClient
 
         sort($params);
 
-        $signature = md5($this->shared_secret . join('', $params));
+        $signature = md5($this->client_secret . join('', $params));
 
         return $get['signature'] === $signature;
     }

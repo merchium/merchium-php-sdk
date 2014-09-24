@@ -5,11 +5,11 @@ require '../MerchiumClient.php';
 //define('MERCHIUM_DEBUG', true);
 
 define('MERCHIUM_APP_KEY', '');
-define('MERCHIUM_SHARED_SECRET', '');
+define('MERCHIUM_CLIENT_SECRET', '');
 
 if (!empty($_GET['code'])) {
     $shop_domain = $_GET['shop'];
-    $merchium = new MerchiumClient(MERCHIUM_APP_KEY, MERCHIUM_SHARED_SECRET, $shop_domain);
+    $merchium = new MerchiumClient(MERCHIUM_APP_KEY, MERCHIUM_CLIENT_SECRET, $shop_domain);
 
     if ($merchium->validateSignature($_GET) != true) {
         echo "<p>Error validate signature</p>";
