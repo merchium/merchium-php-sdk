@@ -136,3 +136,4 @@ foreach ($gres['products'] as $r) {
 
 ?>
 </body>
+</html>
