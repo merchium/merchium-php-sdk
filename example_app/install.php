@@ -28,7 +28,7 @@ if (!empty($_GET['code'])) {
     //
     // Redirect
     //
-    header('Location: application.php');
+    header('Location: app.php');
     exit;
 }
 
