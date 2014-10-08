@@ -7,12 +7,12 @@ require '../MerchiumClient.php';
 define('MERCHIUM_APP_KEY', '');
 define('MERCHIUM_CLIENT_SECRET', '');
 
-if (empty($_COOKIE['merchium_shop']) || empty($_COOKIE['merchium_access_token'])) {
+if (empty($_COOKIE['merchium_shop_domain']) || empty($_COOKIE['merchium_access_token'])) {
       echo "<p>Application not installed</p>";
       exit;
 }
 
-$shop_domain  = $_COOKIE['merchium_shop'];
+$shop_domain  = $_COOKIE['merchium_shop_domain'];
 $access_token = $_COOKIE['merchium_access_token'];
 
 $merchium = new MerchiumClient(MERCHIUM_APP_KEY, MERCHIUM_CLIENT_SECRET, $shop_domain, $access_token);
@@ -128,8 +128,8 @@ foreach ($gres['products'] as $r) {
     $product_id = $r['product_id'];
     $res = $merchium->deleteRequest("products/{$product_id}", array('price' => 2500.0));
     if ($res == false) {
-	echo "<p>Error raised on delete request: <b>" . $merchium->getLastError() . "</b></p>";
-	exit;
+        echo "<p>Error raised on delete request: <b>" . $merchium->getLastError() . "</b></p>";
+        exit;
     }
     echo "<p>Product with product_id={$product_id} was successfully deleted.</p>";
 }

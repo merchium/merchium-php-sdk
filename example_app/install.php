@@ -8,7 +8,7 @@ define('MERCHIUM_APP_KEY', '');
 define('MERCHIUM_CLIENT_SECRET', '');
 
 if (!empty($_GET['code'])) {
-    $shop_domain = $_GET['shop'];
+    $shop_domain = $_GET['shop_domain'];
     $merchium = new MerchiumClient(MERCHIUM_APP_KEY, MERCHIUM_CLIENT_SECRET, $shop_domain);
 
     if ($merchium->validateSignature($_GET) != true) {
@@ -22,13 +22,13 @@ if (!empty($_GET['code'])) {
         exit;
     }
 
-    setcookie('merchium_shop', $shop_domain, time() + 60 * 60 * 24 * 30, '/');
+    setcookie('merchium_shop_domain', $shop_domain, time() + 60 * 60 * 24 * 30, '/');
     setcookie('merchium_access_token', $access_token, time() + 60 * 60 * 24 * 30, '/');
 
     //
     // Redirect
     //
-    header('Location: admin.php');
+    header('Location: application.php');
     exit;
 }
 
