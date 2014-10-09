@@ -2,7 +2,7 @@
 
 class MerchiumClient
 {
-    const LIB_VERSION = '0.9.2';
+    const LIB_VERSION = '0.9.3';
 
     public $shop_domain;
 
@@ -14,7 +14,7 @@ class MerchiumClient
     protected $last_error_status = 0;
     protected $last_error = '';
 
-    public function __construct($app_key, $client_secret, $shop_domain, $access_token = '')
+    public function __construct($app_key, $client_secret, $shop_domain = '', $access_token = '')
     {
         $this->app_key       = $app_key;
         $this->client_secret = $client_secret;
@@ -25,6 +25,11 @@ class MerchiumClient
     public function setAccessToken($access_token)
     {
         $this->access_token = $access_token;
+    }
+
+    public function setShopDomain($shop_domain)
+    {
+        $this->shop_domain = rtrim($shop_domain, '/') . '/';
     }
 
     public function getInstallationUrl($scope, $redirect_uri = '')
