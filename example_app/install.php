@@ -4,8 +4,8 @@ require '../MerchiumClient.php';
 
 //define('MERCHIUM_DEBUG', true);
 
-define('MERCHIUM_APP_KEY', '');
-define('MERCHIUM_CLIENT_SECRET', '');
+define('MERCHIUM_APP_KEY', '[YOUR_APP_KEY]');
+define('MERCHIUM_CLIENT_SECRET', '[YOUR_CLIENT_SECRET]');
 
 if (!empty($_GET['code'])) {
     $shop_domain = $_GET['shop_domain'];

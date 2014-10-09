@@ -4,8 +4,8 @@ require '../MerchiumClient.php';
 
 //define('MERCHIUM_DEBUG', true);
 
-define('MERCHIUM_APP_KEY', '');
-define('MERCHIUM_CLIENT_SECRET', '');
+define('MERCHIUM_APP_KEY', '[YOUR_APP_KEY]');
+define('MERCHIUM_CLIENT_SECRET', '[YOUR_CLIENT_SECRET]');
 
 if (empty($_COOKIE['merchium_shop_domain']) || empty($_COOKIE['merchium_access_token'])) {
       echo "<p>Application not installed</p>";
