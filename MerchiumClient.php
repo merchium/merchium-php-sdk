@@ -2,7 +2,7 @@
 
 class MerchiumClient
 {
-    const LIB_VERSION = '0.9.4';
+    const LIB_VERSION = '0.9.5';
 
     public $shop_domain;
 
@@ -34,7 +34,7 @@ class MerchiumClient
 
     public function getInstallationUrl($scope, $redirect_uri = '')
     {
-        $url = "http://{$this->shop_domain}/api/authorize/?client_id={$this->app_key}&scope=" . urlencode($scope);
+        $url = "http://{$this->shop_domain}api/authorize/?client_id={$this->app_key}&scope=" . $scope;
         if (!empty($redirect_uri)) {
             $url .= "&redirect_uri=" . urlencode($redirect_uri);
         }
