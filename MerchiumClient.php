@@ -2,12 +2,12 @@
 
 class MerchiumClient
 {
-    const LIB_VERSION = '0.9.5';
+    const LIB_VERSION = '0.9.6';
 
     public $shop_domain;
 
     protected $token;
-    protected $api_key;
+    protected $app_key;
     protected $access_token;
     protected $client_secret;
     protected $last_response_headers = null;
