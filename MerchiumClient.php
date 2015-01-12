@@ -2,7 +2,7 @@
 
 class MerchiumClient
 {
-    const LIB_VERSION = '0.9.6';
+    const LIB_VERSION = '0.9.7';
 
     public $shop_domain;
 
@@ -88,7 +88,7 @@ class MerchiumClient
         }
 
         if (is_array($params)) {
-            $params = http_build_query($params, '', '&amp;');
+            $params = http_build_query($params, '', '&');
         }
 
         if ($method == 'GET') {
