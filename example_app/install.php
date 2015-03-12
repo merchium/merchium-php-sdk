@@ -22,6 +22,8 @@ if (!empty($_GET['code'])) {
         exit;
     }
 
+    header("P3P: CP=\"Empty P3P policy\"");//IE third party cookie hack
+
     setcookie('merchium_shop_domain', $shop_domain, time() + 60 * 60 * 24 * 30, '/');
     setcookie('merchium_access_token', $access_token, time() + 60 * 60 * 24 * 30, '/');
 
