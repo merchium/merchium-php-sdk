@@ -1,68 +1,68 @@
 # Merchium PHP SDK
 
-Здравствуйте, и добро пожаловать в **Merchium PHP SDK** — набор инструментов для разработки приложений для [Мерчиума](http://www.merchium.ru) на PHP.
+Hello and welcome to **Merchium PHP SDK**, a [Merchium](http://www.merchium.com) app development toolkit for PHP developers.
 
-Merchium PHP SDK включает в себя PHP-библиотеку **MerchiumClient.php** и пример приложения, написанного с ее использованием (разбор примера вы найдете в [документации](http://docs.merchium.ru/apps)).
+Merchium PHP SDK consists of the **MerchiumClient.php** PHP library and an example app (see it described in the [docs](http://docs.merchium.com/apps)).
 
 ## MerchiumClient.php
 
-Библиотека MerchiumClient.php служит для общения c [REST API Мерчиума](http://docs.merchium.ru/apps/api). Библиотека представляет собой класс MerchiumClient, предоставляющий методы работы с API.
+Use the MerchiumClient.php library to interact with the [Merchium REST API](http://docs.merchium.ru/apps/api). The library contains a single class MerchiumClient which offers methods for API interaction.
 
-Версия библиотеки хранится в константе `MerchiumClient::LIB_VERSION`.
+You can find the current library version in the `MerchiumClient::LIB_VERSION` constant.
 
-### Методы класса MerchiumClient
+### The MerchiumClient Class Methods
 
-1. `__construct($app_key, $shared_secret, $shop_domain = '', $access_token = '')` — Конструктор класса.
-  - `$app_key` — параметр приложения App key (см. страницу приложения в панели партнера).
-  - `$shared_secret` — параметр приложения Shared secret (см. [Регистрация учетной записи партнера и создание приложения](https://docs.google.com/a/cs-cart.com/document/- d/1pYS6ta0NzWd_JmxP8xbmjDI8aCppJ8Z5JaFzB5DaZTs/edit#heading=h.x1i5nwg3pnh1)).
-  - `$shop_domain` — Уникальный домен магазина на mymerchium.ru (например, mystore.mymerchium.ru).
-  - `$access_token` — Токен доступа к API.
+1. `__construct($app_key, $shared_secret, $shop_domain = '', $access_token = '')`—class constructor.
+  - `$app_key`—the App key app param (see the app page in your Merchium partner panel).
+  - `$shared_secret`—the Client secret app param (see [Регистрация учетной записи партнера и создание приложения](https://docs.google.com/document/d/1mU7cJTNlXuaiGIQ645gxu8XonV0xm7sGnKsjdJESxxs/edit#heading=h.92nl0c1q6xrh)).
+  - `$shop_domain`—unique store domain at mymerchium.com (e.g. mystore.mymerchium.com).
+  - `$access_token`—API access token.
 
-1. `setAccessToken($shop_domain)` — Установка значения токена доступа в API.
-  - `$shop_domain` — Уникальный домен магазина на mymerchium.ru (например, mystore.mymerchium.ru).
+1. `setAccessToken($shop_domain)`—set the API access token value.
+  - `$shop_domain`—unique store domain at mymerchium.com (e.g. mystore.mymerchium.com).
 
-1. `setShopDomain($access_token)` - Установка значения домена магазина.
-  - `$access_token` — Токен доступа к API.
+1. `setShopDomain($access_token)`—set the store domain value.
+  - `$access_token`—API access token.
 
-1. `getInstallationUrl($scope, $redirect_uri = '')` — Получение ссылки для установки приложения (см. [Авторизация. AccessToken](https://docs.google.com/a/cs-cart.com/document/d/16O3sURFHbPlBDWz2cIOPWp8oNd9mKDAHCAXByxjfseg/edit)). Обычно этот метод не нужен, т. к. Маркет генерирует ссылку автоматически.
-  - `$scope` — Список идентификаторов доступа.
-  - `$redirect_uri` — Адрес для редиректа после установки приложения.
+1. `getInstallationUrl($scope, $redirect_uri = '')`—get the app installation link (see [Authorization. AccessToken](https://docs.google.com/a/cs-cart.com/document/d/16O3sURFHbPlBDWz2cIOPWp8oNd9mKDAHCAXByxjfseg/edit)). Normally, you don't need to call this method manually, because the Marketplace generates the link itself.
+  - `$scope`—permission scope list.
+  - `$redirect_uri`—post-install redirect URI .
 
-1. `requestAccessToken($code)` — Отправка запроса на получение токена доступа.
-  - `$code` — Временный код, (см. [Авторизация. AccessToken](https://docs.google.com/a/cs-cart.com/document/d/16O3sURFHbPlBDWz2cIOPWp8oNd9mKDAHCAXByxjfseg/edit)).
+1. `requestAccessToken($code)`—send a request to get an API access token.
+  - `$code`—temporary code, (see [Authorization. AccessToken](https://docs.google.com/a/cs-cart.com/document/d/16O3sURFHbPlBDWz2cIOPWp8oNd9mKDAHCAXByxjfseg/edit)).
 
-1. `getRequest($path, $params)` — Отправка запроса на получение данных обьектов.
-  - `$path` — Адрес объекта, т. е. часть URL после http://STORE_NAME.mymerchium.ru/api/.
-  - `$params` — Параметры запроса.
+1. `getRequest($path, $params)`—send a request to get object data.
+  - `$path`—path to the object, i.e. part of the URL after http://STORE_NAME.mymerchium.com/api/.
+  - `$params`—request params.
 
-1. `createRequest($path, $params)` — Отправка запроса на создание объекта.
-  - `$path` — Адрес объекта, т. е. часть URL после http://STORE_NAME.mymerchium.ru/api/.
-  - `$params` — Параметры запроса.
+1. `createRequest($path, $params)`—send a request to create an object.
+  - `$path`—path to the object, i.e. part of the URL after http://STORE_NAME.mymerchium.com/api/.
+  - `$params`—request params.
 
-1. `updateRequest($path, $params)` — Отправка запроса на обновление данных объекта.
-  - `$path` — Адрес объекта, т. е. часть URL после http://STORE_NAME.mymerchium.ru/api/.
-  - `$params` — Параметры запроса.
+1. `updateRequest($path, $params)`—send a request to update object data.
+  - `$path`—path to the object, i.e. part of the URL after http://STORE_NAME.mymerchium.com/api/.
+  - `$params`—request params.
 
-1. `deleteRequest($path)` — Отправка запроса на удаление объекта.
-  - `$path` — Адрес объекта, т. е. часть URL после http://STORE_NAME.mymerchium.ru/api/.
+1. `deleteRequest($path)`—send a request to delete an object.
+  - `$path`—path to the object, i.e. part of the URL after http://STORE_NAME.mymerchium.com/api/.
 
-1. `testRequest()` — Отправка тестового запроса, например для проверки соединения.
+1. `testRequest()`—send a test request, e.g. to check the connection.
 
-1. `validateSignature($get)` — Валидация сигнатуры входящего запроса (см. [Авторизация. AccessToken](https://docs.google.com/a/cs-cart.com/document/d/16O3sURFHbPlBDWz2cIOPWp8oNd9mKDAHCAXByxjfseg/edit)).
-  - `$get` — Параметры запроса к скрипту, обычно массив `$_GET`.
+1. `validateSignature($get)`—validate the signature of an incoming request (see [Authorization. AccessToken](https://docs.google.com/a/cs-cart.com/document/d/16O3sURFHbPlBDWz2cIOPWp8oNd9mKDAHCAXByxjfseg/edit)).
+  - `$get`—request params, usually a `$_GET` array.
 
-1. `getLastErrorStatus()` — Узнать код последней ошибки (из ответа на API-запрос). См. [Коды ошибок](https://docs.google.com/a/cs-cart.com/document/d/1izDXBnCPkrkwt7wPTTq8R7cORQOXGHYOhZTIt66pc5k/edit).
+1. `getLastErrorStatus()`—get the last error code from the API response. See [Error Codes](https://docs.google.com/document/d/1wku883HFRjoaGsPK1Odkiu3DWJVjIkyhlaMrjxfJbw4/edit).
 
-1. `getLastError()` - Узнать текст последней ошибки (из ответа на API-запрос). См. [Коды ошибок](https://docs.google.com/a/cs-cart.com/document/d/1izDXBnCPkrkwt7wPTTq8R7cORQOXGHYOhZTIt66pc5k/edit).
+1. `getLastError()`—get the last error message from the API response. See [Error Codes](https://docs.google.com/document/d/1wku883HFRjoaGsPK1Odkiu3DWJVjIkyhlaMrjxfJbw4/edit).
 
-### Ошибки, генерируемые REST API
+### Errors Returned by the API
 
-См. [Коды ошибок](https://docs.google.com/a/cs-cart.com/document/d/1izDXBnCPkrkwt7wPTTq8R7cORQOXGHYOhZTIt66pc5k/edit).
+See [Error Codes](https://docs.google.com/document/d/1wku883HFRjoaGsPK1Odkiu3DWJVjIkyhlaMrjxfJbw4/edit).
 
-### Ошибки, генерируемые библиотекой
+### Errors Returned by the Library
 
-- **Curl PHP module not found** — Не найдено PHP-расширение curl.
-- **Сurl error(CODE): ERROR** — Ошибки, генерируемые расширением curl.
-- **Could not JSON-encode the request data** — Ошибка при JSON-кодировании данных.
-- **Could not JSON-decode the response** — Ошибка при декодированни полученных от сервера JSON-данных.
-- **Empty response** — Получен пустой ответ от сервера.
+- **Curl PHP module not found**—the curl PHP extension not found.
+- **Сurl error(CODE): ERROR**—errors returned by the curl extension.
+- **Could not JSON-encode the request data**—error during JSON encoding.
+- **Could not JSON-decode the response**—error during deconding of the server returned JSON data.
+- **Empty response**—empty response from the server.
