@@ -1,0 +1,41 @@
+{
+    "name": "merchium/merchium-sdk",
+    "type": "library",
+    "description": "Merchium PHP SDK",
+    "keywords": ["merchium","sdk"],
+    "homepage": "http://apps.merchium.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ilya Shalnev",
+            "email": "zeke@merchium.com",
+            "homepage": "https://merchium.com/",
+            "role": "Founder and project lead"
+        },
+        {
+            "name": "Dmitry Sukhonosov",
+            "email": "klerik@merchium.com",
+            "homepage": "https://merchium.com/",
+            "role": "Developer"
+        },
+        {
+            "name": "Vladimir Guts",
+            "email": "gvs@merchium.com",
+            "homepage": "https://merchium.com/",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/merchium/merchium_php_sdk/issues?state=open",
+        "forum": "https://help.merchium.com/support/home",
+        "source": "https://github.com/merchium/merchium_php_sdk"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "lib-curl": "*",
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "classmap": [""]
+    }
+}
