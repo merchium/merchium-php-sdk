@@ -4,7 +4,7 @@
     "description": "Merchium PHP SDK",
     "keywords": ["merchium","sdk"],
     "homepage": "http://apps.merchium.com/",
-    "license": "MIT",
+    "license": "Merchium Platform",
     "authors": [
         {
             "name": "Ilya Shalnev",
