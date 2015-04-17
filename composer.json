@@ -26,9 +26,9 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/merchium/merchium_php_sdk/issues?state=open",
+        "issues": "https://github.com/merchium/merchium-php-sdk/issues?state=open",
         "forum": "https://help.merchium.com/support/home",
-        "source": "https://github.com/merchium/merchium_php_sdk"
+        "source": "https://github.com/merchium/merchium-php-sdk"
     },
     "minimum-stability": "dev",
     "require": {
