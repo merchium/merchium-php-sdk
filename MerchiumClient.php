@@ -2,7 +2,7 @@
 
 class MerchiumClient
 {
-    const LIB_VERSION = '0.9.7';
+    const LIB_VERSION = '0.9.8';
 
     public $shop_domain;
 
@@ -228,6 +228,13 @@ class MerchiumClient
         } else {
             return false;
         }
+    }
+
+    public function validateRawHmac($data, $hmac)
+    {
+        $calculated_hmac = base64_encode(hash_hmac('sha256', $data, $this->client_secret, true));
+
+        return $calculated_hmac === $hmac;
     }
 
     public function validateSignature($get)
