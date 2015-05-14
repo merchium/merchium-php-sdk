@@ -2,7 +2,7 @@
 
 class MerchiumClient
 {
-    const LIB_VERSION = '0.9.8';
+    const LIB_VERSION = '0.9.9';
 
     public $shop_domain;
 
@@ -237,14 +237,17 @@ class MerchiumClient
         return $calculated_hmac === $hmac;
     }
 
-    public function validateSignature($get)
+    public function calculateSignature($get)
     {
-        if (empty($get['signature'])) {
-            return false;
+        // Convert utl to GET-params
+        if (!is_array($get)) {
+            $guery = parse_url($get, PHP_URL_QUERY);
+            $get = array();
+            parse_str($query, $get);
         }
-
+        
         $params = array();
-        foreach($get as $name => $value) {
+        foreach ($get as $name => $value) {
             if ($name == 'signature') {
                 continue;
             }
@@ -254,9 +257,16 @@ class MerchiumClient
 
         sort($params);
 
-        $signature = md5($this->client_secret . join('', $params));
+        return md5($this->client_secret . implode('', $params));
+    }
 
-        return $get['signature'] === $signature;
+    public function validateSignature($get)
+    {
+        if (empty($get['signature'])) {
+            return false;
+        }
+
+        return $get['signature'] === $this->calculateSignature($get);
     }
 
     protected function jsonEncode($data)
