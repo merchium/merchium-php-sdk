@@ -2,7 +2,7 @@
 
 class MerchiumClient
 {
-    const LIB_VERSION = '0.9.9';
+    const LIB_VERSION = '1.0.0';
 
     public $shop_domain;
 
@@ -246,14 +246,23 @@ class MerchiumClient
             parse_str($query, $get);
         }
         
-        $params = array();
-        foreach ($get as $name => $value) {
-            if ($name == 'signature') {
-                continue;
-            }
+        $preConvert = function($arr) use (&$preConvert) {
+            $params = [];
+            foreach ($arr as $name => $value) {
+                if ($name == 'signature') {
+                    continue;
+                }
 
-            $params[] = $name . '=' . $value;
-        }
+                if (is_array($value)) {
+                    $value = implode('', $preConvert($value));
+                }
+
+                $params[] = $name . '=' . $value;
+            }
+            return $params;
+        };
+        
+        $params = $preConvert($get);
 
         sort($params);
 
