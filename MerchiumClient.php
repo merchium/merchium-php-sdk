@@ -241,7 +241,7 @@ class MerchiumClient
     {
         // Convert utl to GET-params
         if (!is_array($get)) {
-            $guery = parse_url($get, PHP_URL_QUERY);
+            $query = parse_url($get, PHP_URL_QUERY);
             $get = array();
             parse_str($query, $get);
         }
