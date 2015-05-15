@@ -2,7 +2,7 @@
 
 class MerchiumClient
 {
-    const LIB_VERSION = '1.0.0';
+    const LIB_VERSION = '1.0.1';
 
     public $shop_domain;
 
