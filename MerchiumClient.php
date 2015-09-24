@@ -2,7 +2,7 @@
 
 class MerchiumClient
 {
-    const LIB_VERSION = '1.0.1';
+    const LIB_VERSION = '1.0.2';
 
     public $shop_domain;
 
@@ -93,7 +93,10 @@ class MerchiumClient
 
         if ($method == 'GET') {
             curl_setopt($ch, CURLOPT_HTTPGET, 1);
-            $url = $url . "?" . $params;//TODO: carefully build query
+            if ($params) {
+                $delimiter = strpos($url, '?') ? '&' : '?';
+                $url .= $delimiter . $params;
+            }
 
         } elseif($method == 'POST') {
             curl_setopt($ch, CURLOPT_POST, 1);
