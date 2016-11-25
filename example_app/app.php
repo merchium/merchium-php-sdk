@@ -2,7 +2,7 @@
 
 require '../MerchiumClient.php';
 
-//define('MERCHIUM_DEBUG', true);
+// define('MERCHIUM_DEBUG', true);
 
 define('MERCHIUM_APP_KEY', '[YOUR_APP_KEY]');
 define('MERCHIUM_CLIENT_SECRET', '[YOUR_CLIENT_SECRET]');
@@ -107,9 +107,8 @@ if ($res === false) {
 
 echo "<p>Price for product with product_id={$res['product_id']} was successfully updated.</p>";
 
-
 //
-// Send
+// Get
 //
 $gres = $merchium->getRequest('products', array('q' => 'Test product', 'pname' => 'Y'));
 if ($gres === false) {
@@ -117,21 +116,23 @@ if ($gres === false) {
     exit;
 }
 
-$product_id = $gres['products'][0]['product_id'];
-echo "<p>Product with product_id={$product_id} was successfully found.</p>";
+if (!empty($gres['products'])) {
+    $product_id = $gres['products'][0]['product_id'];
+    echo "<p>Product with product_id={$product_id} was successfully found.</p>";
 
 
-//
-// Send Delete
-//
-foreach ($gres['products'] as $r) {
-    $product_id = $r['product_id'];
-    $res = $merchium->deleteRequest("products/{$product_id}", array('price' => 2500.0));
-    if ($res == false) {
-        echo "<p>Error raised on delete request: <b>" . $merchium->getLastError() . "</b></p>";
-        exit;
+    //
+    // Send Delete
+    //
+    foreach ($gres['products'] as $r) {
+        $product_id = $r['product_id'];
+        $res = $merchium->deleteRequest("products/{$product_id}");
+        if ($res == false) {
+            echo "<p>Error raised on delete request: <b>" . $merchium->getLastError() . "</b></p>";
+            exit;
+        }
+        echo "<p>Product with product_id={$product_id} was successfully deleted.</p>";
     }
-    echo "<p>Product with product_id={$product_id} was successfully deleted.</p>";
 }
 
 ?>

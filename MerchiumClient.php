@@ -147,7 +147,7 @@ class MerchiumClient
             $request_headers[] = 'X-Merchium-Access-Token: ' . $this->access_token;
         }
 
-        if ($method != 'GET') {
+        if (in_array($method, array('POST', 'PUT'))) {
             $request_headers[] = 'Content-Type: application/json';
         }
 
@@ -166,7 +166,7 @@ class MerchiumClient
         }
 
         $data = $this->jsonDecode($response);
-        if ($data == false) {
+        if ($data === false) {
             return false;
         }
 
@@ -214,12 +214,8 @@ class MerchiumClient
     public function deleteRequest($path, $params = array())
     {
         $url = "http://{$this->shop_domain}api/" . trim($path, '/');
-        $response = $this->processRequest('DELETE', $url, $params);       
-        if (!empty($response) && isset($response['message']) && $response['message'] = 'Ok') {
-            return true;
-        } else {
-            return false;
-        }
+        $response = $this->processRequest('DELETE', $url, $params);
+        return $response !== false;
     }
 
     public function testRequest()
@@ -248,7 +244,7 @@ class MerchiumClient
             $get = array();
             parse_str($query, $get);
         }
-        
+
         $preConvert = function($arr) use (&$preConvert) {
             $params = [];
             foreach ($arr as $name => $value) {
@@ -264,7 +260,7 @@ class MerchiumClient
             }
             return $params;
         };
-        
+
         $params = $preConvert($get);
 
         sort($params);
@@ -294,6 +290,10 @@ class MerchiumClient
 
     protected function jsonDecode($encoded)
     {
+        if (empty($encoded)) {
+            return array();
+        }
+
         $data = json_decode($encoded, true);
         if (is_null($data)) {
             if (empty($this->last_error)) {
